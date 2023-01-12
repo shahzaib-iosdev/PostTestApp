@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CommentsListRow: View {
     
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: CommentsListRowModel
     var body: some View {
         Color.gray.opacity(0.05)
         VStack(alignment: .leading,spacing: 10)

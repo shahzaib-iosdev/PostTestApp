@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PostsView: View {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: PostsViewModel
     @Binding var badgeNumber: Int
     @State private var postList = [Post]()
     var body: some View {

@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-extension PostListRow {
-    
-    class ViewModel: ObservableObject {
+class PostListRowViewModel: ObservableObject {
         
         let post: Post
         
@@ -17,6 +15,4 @@ extension PostListRow {
             self.post = post
         }
         
-        
-    }
 }

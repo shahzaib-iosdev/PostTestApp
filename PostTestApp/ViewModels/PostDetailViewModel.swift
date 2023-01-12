@@ -8,9 +8,7 @@
 import SwiftUI
 import Alamofire
 
-extension PostDetailView {
-    
-    class ViewModel: ObservableObject {
+class PostDetailViewModel: ObservableObject {
         @Published var post: Post
       //@Published var postDetail: Post?
 
@@ -45,7 +43,6 @@ extension PostDetailView {
 //                  }
 //          }
 //      }
-    }
   }
 
 

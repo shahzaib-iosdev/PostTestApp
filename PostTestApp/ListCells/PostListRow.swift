@@ -15,7 +15,7 @@ struct PostListRow: View {
         animation: .default)
     private var postsOffline: FetchedResults<Posts>
     
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: PostListRowViewModel
     @State var openDetailspage = false
     @State var isFromOfflineTab = false
     var body: some View {

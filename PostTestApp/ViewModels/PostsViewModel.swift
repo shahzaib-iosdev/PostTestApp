@@ -8,9 +8,7 @@
 import SwiftUI
 import Alamofire
 
-extension PostsView
-{
-    class ViewModel: ObservableObject {
+class PostsViewModel: ObservableObject {
         
         @Published var posts: [Post]
         @Published var isLinkActive: [String: Bool] = [:]
@@ -45,4 +43,3 @@ extension PostsView
             }
         }
     }
-}

@@ -8,9 +8,7 @@
 import SwiftUI
 import Alamofire
 
-extension PostCommentsView {
-    
-    class ViewModel: ObservableObject {
+class PostCommentsViewModel: ObservableObject {
         
         @Published var comments: [Comments]
         @Published var post: Post
@@ -45,5 +43,4 @@ extension PostCommentsView {
                     }
             }
         }
-    }
 }

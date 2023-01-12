@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PostCommentsView: View {
     
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: PostCommentsViewModel
     var body: some View {
         VStack
         {

@@ -19,7 +19,7 @@ struct PostDetailView: View {
     @State var isFromOfflineTab = false
     @Binding var badgeNumber: Int
     
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: PostDetailViewModel
     @State var openCommentspage = false
     var body: some View {
         VStack(alignment: .leading,spacing: 10)

@@ -7,14 +7,11 @@
 
 import SwiftUI
 
-extension CommentsListRow {
-    
-    class ViewModel: ObservableObject {
+class CommentsListRowModel: ObservableObject {
         
         let comments: Comments
         
         init(comments: Comments) {
             self.comments = comments
         }
-    }
 }
