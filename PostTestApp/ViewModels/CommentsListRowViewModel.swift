@@ -8,10 +8,10 @@
 import SwiftUI
 
 class CommentsListRowModel: ObservableObject {
-        
-        let comments: Comments
-        
-        init(comments: Comments) {
-            self.comments = comments
-        }
+    
+    let comments: Comments
+    
+    init(comments: Comments) {
+        self.comments = comments
+    }
 }

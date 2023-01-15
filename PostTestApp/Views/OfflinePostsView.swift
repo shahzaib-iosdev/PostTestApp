@@ -10,7 +10,7 @@ import CoreData
 struct OfflinePostsView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath:  \Posts.id, ascending: true)],
         animation: .default)
@@ -42,7 +42,7 @@ extension OfflinePostsView
     func convertToPost() -> [Post] {
         var allposts = [Post]()
         postsOffline.forEach { pst in
-
+            
             allposts.append(Post(managedObject: pst)!)
         }
         return allposts

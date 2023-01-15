@@ -31,9 +31,7 @@ struct PostDetailView: View {
                     .font(.system(size: 15))
                     .multilineTextAlignment(.leading)
                 
-                
             }
-            
             HStack
             {
                 Text("\(viewModel.post.body)")
@@ -44,8 +42,6 @@ struct PostDetailView: View {
             {
                 HStack
                 {
-                    
-                    
                     VStack
                     {
                         Button("Comments")
@@ -108,12 +104,10 @@ struct PostDetailView: View {
                             .padding(.leading)
                         }
                     }
-                   
-                    
                 }
                 .padding()
             }
-                
+            
             Spacer()
         }
         .padding()
@@ -158,7 +152,7 @@ extension PostDetailView
     func convertToPost() -> [Post] {
         var allposts = [Post]()
         postsOffline.forEach { pst in
-
+            
             allposts.append(Post(managedObject: pst)!)
         }
         return allposts

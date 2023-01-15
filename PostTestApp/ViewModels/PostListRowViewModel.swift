@@ -8,11 +8,11 @@
 import SwiftUI
 
 class PostListRowViewModel: ObservableObject {
-        
-        let post: Post
-        
-        init(post: Post) {
-            self.post = post
-        }
-        
+    
+    let post: Post
+    
+    init(post: Post) {
+        self.post = post
+    }
+    
 }

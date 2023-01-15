@@ -9,38 +9,49 @@ import SwiftUI
 import Alamofire
 
 class PostCommentsViewModel: ObservableObject {
+    
+    @Published var comments: [Comments]
+    @Published var post: Post
+    @Published var error: Error?
+    @Published var success: Bool = false
+    init(post:Post) {
         
-        @Published var comments: [Comments]
-        @Published var post: Post
+        self.post = post
+        self.comments = [Comments]()
+    }
+    
+    func getPostComments(withID postID: Int, dataResult: @escaping(_ success: Bool, _ data: Any) -> Void) {
         
-        init(post:Post) {
-            
-            self.post = post
-            self.comments = [Comments]()
-        }
-        
-        func getPostComments(withID postID: Int, dataResult: @escaping(_ success: Bool, _ data: Any) -> Void) {
-            
-            let path: String = baseURL() + "posts/\(postID)/comments/"
-            DispatchQueue.global(qos: .background).async {
-                AF.request(path, method: .get)
-                    .responseData {
-                        response in
-                        switch response.result {
-                        case .success(let value):
-                            do {
-                                self.comments = try! JSONDecoder().decode([Comments].self, from: value)
-                                self.comments = self.comments.sorted(by: { $0.id > $1.id})
+        let path: String = baseURL() + "posts/\(postID)/comments/"
+        DispatchQueue.global(qos: .background).sync {
+            AF.request(path, method: .get)
+                .responseData {
+                    response in
+                    switch response.result {
+                    case .success(let value):
+                        do {
+                            self.comments = try! JSONDecoder().decode([Comments].self, from: value)
+                            if self.comments.count == 0
+                            {
+                                self.success = false
+                                dataResult(false, "There are no comments at the moment")
+                            }
+                            else
+                            {
+                                self.success = true
                                 dataResult(true, "Success")
-                                
                             }
-                            catch {
-                                dataResult(false, "There are no posts at the moment")
-                            }
-                        case .failure(let err):
-                            dataResult(false, err.localizedDescription)
                         }
+                        catch {
+                            self.success = false
+                            dataResult(false, "There are no comments at the moment")
+                        }
+                    case .failure(let err):
+                        self.success = false
+                        self.error = err
+                        dataResult(false, err.localizedDescription)
                     }
-            }
+                }
         }
+    }
 }

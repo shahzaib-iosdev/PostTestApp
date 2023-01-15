@@ -18,6 +18,13 @@ struct PostListRow: View {
     @ObservedObject var viewModel: PostListRowViewModel
     @State var openDetailspage = false
     @State var isFromOfflineTab = false
+    
+    @State var showingAlert: Bool = false
+    @State private var activeAlert: ActiveAlert = .failure
+    enum ActiveAlert {
+        case success
+        case failure
+    }
     var body: some View {
         Color.gray.opacity(0.05)
         VStack(alignment: .leading,spacing: 10)
@@ -95,6 +102,16 @@ struct PostListRow: View {
             }
         }
         .frame(width: UIScreen.main.bounds.size.width - 30,alignment: .leading)
+        .alert(isPresented: $showingAlert, content: {
+            switch activeAlert {
+            case .success:
+                return Alert(title: Text("Success"), message: Text("Successfully saved for offline view"), dismissButton: .default(Text("OK")) {
+                    print("Success")
+                })
+            case .failure:
+                return Alert(title: Text("Error"), message: Text("Unable to save for offline, please try again"), dismissButton: .default(Text("OK")))
+            }
+        })
         .background(
             RoundedRectangle(cornerRadius: 2)
                 .fill(Color.white)
@@ -105,7 +122,6 @@ struct PostListRow: View {
                 
                 
             }
-        
     }
     private func addItem() {
         withAnimation {
@@ -118,11 +134,17 @@ struct PostListRow: View {
 
             do {
                 try viewContext.save()
+                activeAlert = .success
+                showingAlert = true
+                
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                activeAlert = .failure
+                showingAlert = true
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                
             }
         }
     }

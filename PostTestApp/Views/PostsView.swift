@@ -11,6 +11,7 @@ struct PostsView: View {
     @ObservedObject var viewModel: PostsViewModel
     @Binding var badgeNumber: Int
     @State private var postList = [Post]()
+    
     var body: some View {
         NavigationView
         {
@@ -31,7 +32,7 @@ struct PostsView: View {
         }
         .onAppear {
             self.viewModel.loadAllPosts(dataResult: { (success, data) in
-               
+                
                 postList = viewModel.posts
                 print("postList \(data)")
             })
